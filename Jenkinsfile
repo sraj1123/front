@@ -23,7 +23,7 @@ pipeline {
 					steps {
 						script {
 						withSonarQubeEnv(credentialsId: 'SonarQube_Token') {
-						sh 'npm sonar-scanner -Dsonar.projectName=Test3 -Dsonar.projectKey=Test3'
+						sh 'sonar-scanner -Dsonar.projectName=Test3 -Dsonar.projectKey=Test3'
 								}
 							}
 						}
