@@ -1,7 +1,7 @@
 pipeline {
 		agent any
 		tools {
-			maven "maven"
+			nodejs "node"
 		}
 		stages {
 				stage('Git Clone') {
@@ -23,7 +23,7 @@ pipeline {
 					steps {
 						script {
 						withSonarQubeEnv(credentialsId: 'SonarQube_Token') {
-						sh 'mvn sonar:sonar -Dsonar.projectName=Test3 -Dsonar.projectKey=Test3'
+						sh 'npm sonar-scanner -Dsonar.projectName=Test3 -Dsonar.projectKey=Test3'
 								}
 							}
 						}
