@@ -2,6 +2,7 @@ pipeline {
 		agent any
 		tools {
 			nodejs "node"
+      sonarqubeScanner 'SonarQubeScanner'
 		}
 		stages {
 				stage('Git Clone') {
