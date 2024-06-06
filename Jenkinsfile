@@ -20,22 +20,16 @@ pipeline {
 						}
 					}
 				}
-				stage('Sonar Scan') {
-					steps {
-						script {
-						withSonarQubeEnv(credentialsId: 'SonarQube_Token') {
-              sh "${env.SONARQUBE_SCANNER_HOME}/bin/sonar-scanner"
-						  sh 'sonar-scanner -Dsonar.projectName=Test3 -Dsonar.projectKey=Test3'
-              sh """
-   ${scannerHome}/bin/sonar-scanner \
-   -Dsonar.projectName=Test3 \
-   -Dsonar.projectKey=Test3 \
-   -Dsonar.sources=. \
-   """
-								}
-							}
-						}
-					}
+        stage('SonarQube analysis') {
+                    steps {
+                        script {
+                            def scannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                            withSonarQubeEnv('SonarQube') {
+                                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Test3 -Dsonar.projectName=Test3"
+                            }
+                        }
+                    }
+                }
 				stage('Quality Gate Check') {
 					steps {
 						timeout(time: 1, unit: 'HOURS') {
