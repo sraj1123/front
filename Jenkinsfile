@@ -23,7 +23,7 @@ pipeline {
                     steps {
                         script {
                             def scannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-                            withSonarQubeEnv('SonarQube_Token') {
+                            withSonarQubeEnv('SonarQube') {
                                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Test3 -Dsonar.projectName=Test3"
                             }
                         }
