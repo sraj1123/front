@@ -22,7 +22,7 @@ pipeline {
         stage('SonarQube analysis') {
                     steps {
                         script {
-                            def scannerHome = tool 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
+                            def scannerHome = tool name: 'SonarQube', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
                             withSonarQubeEnv('SonarQube_Token') {
                                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=Test3 -Dsonar.projectName=Test3"
                             }
